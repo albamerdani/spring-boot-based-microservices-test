@@ -20,7 +20,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Mono<Student> getStudent(String studentId) {
+    public Mono<Student> getStudent(int studentId) {
         LOG.info("In student service");
         return Mono.just(new Student(1, "Nasir", "nasir@gmail.com", "pass00d"));
     }
