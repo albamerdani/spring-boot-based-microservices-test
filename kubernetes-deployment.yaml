@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-boot-based-microservices-test-deployment
+spec:
+  replicas: 3  # Adjust the number of replicas as needed
+  selector:
+    matchLabels:
+      app: spring-boot-based-microservices-test
+  template:
+    metadata:
+      labels:
+        app: spring-boot-based-microservices-test
+    spec:
+      containers:
+        - name: spring-boot-based-microservices-test
+          image: spring-boot-based-microservices-test:latest  # Replace with your Docker image name and tag
+          ports:
+            - containerPort: 8080  # Adjust the port as needed
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: spring-boot-based-microservices-test-service
+spec:
+  selector:
+    app: spring-boot-based-microservices-test
+  ports:
+    - protocol: TCP
+      port: 80  # The port exposed within the cluster
+      targetPort: 8080  # The port your application is listening on
+  type: ClusterIP  # Use ClusterIP for internal cluster communication
